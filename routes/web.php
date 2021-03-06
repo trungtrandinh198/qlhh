@@ -16,4 +16,20 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('category',[CategoryController::class,'index']);
+Route::prefix('category')->group(function(){
+    Route::get('/',[CategoryController::class,'index']);
+    Route::get('/add',[CategoryController::class,'add']);
+    Route::post('/post-add',[CategoryController::class,'postAdd']);
+    Route::get('/{id}/update',[CategoryController::class,'edit']);
+    Route::post('/post-update',[CategoryController::class,'postUpdate']);
+    Route::post('/{id}/delete',[CategoryController::class,'delete']);
+});
+
+Route::prefix('product')->group(function(){
+    Route::get('/',[CategoryController::class,'index']);
+    Route::get('/add',[CategoryController::class,'add']);
+    Route::post('/post-add',[CategoryController::class,'postAdd']);
+    Route::get('/{id}/update',[CategoryController::class,'edit']);
+    Route::post('/post-update',[CategoryController::class,'postUpdate']);
+    Route::post('/{id}/delete',[CategoryController::class,'delete']);
+});
