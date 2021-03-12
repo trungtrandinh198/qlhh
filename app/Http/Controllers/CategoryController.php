@@ -10,12 +10,11 @@ class CategoryController extends Controller
 
     function index(){
         $categories = Category::all();
-        dd($categories);
-        //return view('admin.category.index','$categories);
+        return view('admin.category.index',['categories'=>$categories]);
     }
 
     function add(){
-        //return view('admin.category.add');
+        return view('admin.category.add');
     }
 
     function postAdd(Request $request){
@@ -25,14 +24,12 @@ class CategoryController extends Controller
         $category->save();
 
         $categories = Category::all();
-        dd($categories);
-        //return view('admin.category.index','$categories);
+        return view('admin.category.index',['categories'=>$categories]);
     }
 
     function update($id){
         $category = Category::find($id);
-        dd($category);
-        //return view('admin.category.edit','$category');
+        return view('admin.category.update',['category'=>$category]);
     }
 
     function postUpdate(Request $request){
@@ -42,8 +39,7 @@ class CategoryController extends Controller
         $category->save();
 
         $categories = Category::all();
-        dd($categories);
-        //return view('admin.category.index','$categories);
+        return view('admin.category.index',['categories'=>$categories]);
     }
 
     function delete(Request $id){

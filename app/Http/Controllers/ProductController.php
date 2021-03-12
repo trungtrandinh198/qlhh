@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -9,14 +10,12 @@ class ProductController extends Controller
 {
     function index(){
         $products = Product::all();
-        dd($products);
-        //return view('admin.product.index','$products);
+        return view('admin.product.index',['products'=>$products]);
     }
 
     function add(){
-        $categories = Product::all();
-        dd($categories);
-        //return view('admin.product.add','$categories);
+        $categories = Category::all();
+        return view('admin.product.add',['categories'=>$categories]);
     }
 
     function postAdd(Request $request){
@@ -24,18 +23,17 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->categoryId = $request->categoryId;
+        $product->categoryId = $request->category;
         $product->save();
 
         $products = Product::all();
-        dd($products);
-        //return view('admin.product.list','$products');
+        return view('admin.product.index',['products'=>$products]);
     }
 
     function update($id){
         $product = Product::find($id);
-        dd($product);
-        //return view('admin.product.edit','$product');
+        $categories = Category::all();
+        return view('admin.product.update',['product'=>$product,'categories'=>$categories]);
     }
 
     function postUpdate(Request $request){
@@ -43,12 +41,11 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->categoryId = $request->categoryId;
+        $product->categoryId = $request->category;
         $product->save();
 
         $products = Product::all();
-        dd($products);
-        //return view('admin.product.list','$products');
+        return view('admin.product.index',['products'=>$products]);
     }
 
     function delete(Request $id){
