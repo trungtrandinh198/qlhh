@@ -18,6 +18,10 @@ class CategoryController extends Controller
     }
 
     function postAdd(Request $request){
+       $request->validate([
+            'name' => 'required|max:225',
+            'description'=> 'required:double'
+        ]);
         $category = new Category();
         $category->name = $request->name;
         $category->description = $request->description;
@@ -33,6 +37,10 @@ class CategoryController extends Controller
     }
 
     function postUpdate(Request $request){
+        $request->validate([
+            'name' => 'required|max:225',
+            'description'=> 'required:double'
+        ]);
         $category = Category::find($request->id);
         $category->name = $request->name;
         $category->description = $request->description;
@@ -42,13 +50,12 @@ class CategoryController extends Controller
         return view('admin.category.index',['categories'=>$categories]);
     }
 
-    function delete(Request $id){
+    function delete($id){
         $category = Category::find($id);
         $category->delete();
 
         $categories = Category::all();
-        dd($categories);
-        //return view('admin.category.index','$categories);
+        return view('admin.category.index',['categories'=>$categories]);
     }
 
 }

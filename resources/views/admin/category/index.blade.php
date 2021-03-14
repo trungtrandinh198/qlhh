@@ -5,9 +5,13 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <div style="float: right;">
+                            <a class="btn btn-success" href="{{route('category.add')}}">Thêm mới</a>
+                        </div>
                         <p class="card-title">DANH SÁCH DANH MỤC</p>
-                        <a class="btn btn-success">Thêm mới</a>
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -29,7 +33,10 @@
                                             </td>
                                             <td>{{$category->description}}</td>
                                             <td>
-                                                <button class="btn btn-danger">Xóa</button>
+                                                <form method="POST" action="{{route('category.delete',['id'=>$category->id])}}">
+                                                    @csrf
+                                                    <button class="btn btn-danger" type="submit">Xóa</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @empty
@@ -47,4 +54,9 @@
             </div>
         </div>
     </div>
+    <javascript>
+        function ConfirmDelete(){
+        alert('343432');
+        }
+    </javascript>
 @endsection

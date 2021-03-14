@@ -19,6 +19,12 @@ class ProductController extends Controller
     }
 
     function postAdd(Request $request){
+        $request->validate([
+            'name' => 'required|max:225',
+            'description' => 'required',
+            'price' => 'required',
+            'category' => 'required'
+        ]);
         $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
@@ -37,6 +43,12 @@ class ProductController extends Controller
     }
 
     function postUpdate(Request $request){
+        $request->validate([
+            'name' => 'required|max:225',
+            'description' => 'required',
+            'price' => 'required',
+            'category' => 'required'
+        ]);
         $product = Product::find($request->id);
         $product->name = $request->name;
         $product->description = $request->description;
@@ -48,12 +60,11 @@ class ProductController extends Controller
         return view('admin.product.index',['products'=>$products]);
     }
 
-    function delete(Request $id){
+    function delete($id){
         $product = Product::find($id);
         $product->delete();
 
         $products = Product::all();
-        dd($products);
-        //return view('admin.product.list','$products');
+        return view('admin.product.index',['products'=>$products]);
     }
 }

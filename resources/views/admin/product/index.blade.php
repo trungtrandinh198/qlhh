@@ -5,9 +5,13 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <div style="float: right">
+                            <a class="btn btn-success" href="{{route('product.add')}}">Thêm mới</a>
+                        </div>
                         <p class="card-title">DANH SÁCH SẢN PHẨM</p>
-                        <a class="btn btn-success" href="{{route('product.add')}}">Thêm mới</a>
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -31,7 +35,12 @@
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>
-                                                <button class="btn btn-danger">Xóa</button>
+                                            <td>
+                                                <form method="POST" action="{{route('product.delete',['id'=>$product->id])}}">
+                                                    @csrf
+                                                    <button class="btn btn-danger" type="submit">Xóa</button>
+                                                </form>
+                                            </td>
                                             </td>
                                         </tr>
                                         @empty

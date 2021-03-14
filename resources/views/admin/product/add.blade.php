@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="content-wrapper">
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
@@ -22,11 +31,11 @@
                             </div>
                             <div class="col-12">
                                 <label for="name">Tên sản phẩm</label>
-                                <input class="form form-control" name="name" id="name">
+                                <input type="text" class="form form-control" name="name" id="name">
                             </div>
                             <div class="col-12">
                                 <label for="name">Giá</label>
-                                <input class="form form-control" name="price" id="price">
+                                <input type="number" class="form form-control" name="price" id="price">
                             </div>
                             <div class="col-12">
                                 <label for="description">Mô tả</label>
