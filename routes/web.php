@@ -19,18 +19,18 @@ Route::get('/', function () {
 });
 Route::prefix('category')->name('category.')->group(function(){
     Route::get('/',[CategoryController::class,'index'])->name('index');
-    Route::get('/add',[CategoryController::class,'add'])->name('add');
-    Route::post('/post-add',[CategoryController::class,'postAdd'])->name('postAdd');
-    Route::get('/{id}/update',[CategoryController::class,'update'])->name('update');
-    Route::post('/post-update',[CategoryController::class,'postUpdate'])->name('postUpdate');
-    Route::post('/{id}/delete',[CategoryController::class,'delete'])->name('delete');
+    Route::get('/add',[CategoryController::class,'create'])->name('create');
+    Route::post('/post-add',[CategoryController::class,'store'])->name('store');
+    Route::get('/{id}/update',[CategoryController::class,'edit'])->name('edit');
+    Route::post('/post-update',[CategoryController::class,'update'])->name('update');
+    Route::post('/{id}/delete',[CategoryController::class,'destroy'])->name('destroy');
 });
 
 Route::prefix('product')->name('product.')->group(function(){
     Route::get('/',[ProductController::class,'index'])->name('index');
-    Route::get('/add',[ProductController::class,'add'])->name('add');
-    Route::post('/post-add',[ProductController::class,'postAdd'])->name('postAdd');
-    Route::get('/{id}/update',[ProductController::class,'update'])->name('update');
-    Route::post('/post-update',[ProductController::class,'postUpdate'])->name('postUpdate');
-    Route::post('/{id}/delete',[ProductController::class,'delete'])->name('delete');
+    Route::get('/add',[ProductController::class,'create'])->name('create');
+    Route::post('/post-add',[ProductController::class,'store'])->name('store');
+    Route::get('/{id}/update',[ProductController::class,'edit'])->name('edit');
+    Route::post('/post-update',[ProductController::class,'update'])->name('update');
+    Route::post('/{id}/delete',[ProductController::class,'destroy'])->name('destroy');
 });

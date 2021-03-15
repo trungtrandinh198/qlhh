@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">CẬP NHẬT SẢN PHẨM</p>
-                        <form action="{{route('product.postUpdate')}}" method="post">
+                        <form action="{{route('product.edit')}}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -25,7 +25,7 @@
                                         @forelse($categories as $category)
                                             <option value="{{$category->id}}" {{$category->id == $product->categoryId ? "selected":""}}>{{$category->name}}</option>
                                         @empty
-                                            <option>Khong có dữ liệu</option>
+                                            <option>Không có dữ liệu</option>
                                         @endforelse
                                     </select>
                                 </div>

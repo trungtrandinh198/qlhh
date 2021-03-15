@@ -13,12 +13,12 @@ class ProductController extends Controller
         return view('admin.product.index',['products'=>$products]);
     }
 
-    function add(){
+    function create(){
         $categories = Category::all();
         return view('admin.product.add',['categories'=>$categories]);
     }
 
-    function postAdd(Request $request){
+    function store(Request $request){
         $request->validate([
             'name' => 'required|max:225',
             'description' => 'required',
@@ -36,13 +36,13 @@ class ProductController extends Controller
         return view('admin.product.index',['products'=>$products]);
     }
 
-    function update($id){
+    function edit($id){
         $product = Product::find($id);
         $categories = Category::all();
         return view('admin.product.update',['product'=>$product,'categories'=>$categories]);
     }
 
-    function postUpdate(Request $request){
+    function update(Request $request){
         $request->validate([
             'name' => 'required|max:225',
             'description' => 'required',
@@ -60,7 +60,7 @@ class ProductController extends Controller
         return view('admin.product.index',['products'=>$products]);
     }
 
-    function delete($id){
+    function destroy($id){
         $product = Product::find($id);
         $product->delete();
 

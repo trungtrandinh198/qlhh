@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title"CHỈNH SỬA DANH MỤC {{$category->name}}</p>
-                        <form action="{{route('category.postUpdate')}}" method="post">
+                        <form action="{{route('category.update')}}" method="post">
                             @csrf
                             <input type="hidden" name="id" id="id" value="{{$category->id}}">
                             <div class="row">

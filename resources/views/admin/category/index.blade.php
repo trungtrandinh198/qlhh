@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="float: right;">
-                            <a class="btn btn-success" href="{{route('category.add')}}">Thêm mới</a>
+                            <a class="btn btn-success" href="{{route('category.create')}}">Thêm mới</a>
                         </div>
                         <p class="card-title">DANH SÁCH DANH MỤC</p>
                     </div>
@@ -29,11 +29,11 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>
-                                                <a href="{{route('category.update', $category->id)}}">{{$category->name}}</a>
+                                                <a href="{{route('category.edit', $category->id)}}">{{$category->name}}</a>
                                             </td>
                                             <td>{{$category->description}}</td>
                                             <td>
-                                                <form method="POST" action="{{route('category.delete',['id'=>$category->id])}}">
+                                                <form method="POST" action="{{route('category.destroy',['id'=>$category->id])}}">
                                                     @csrf
                                                     <button class="btn btn-danger" type="submit">Xóa</button>
                                                 </form>
@@ -54,9 +54,4 @@
             </div>
         </div>
     </div>
-    <javascript>
-        function ConfirmDelete(){
-        alert('343432');
-        }
-    </javascript>
 @endsection

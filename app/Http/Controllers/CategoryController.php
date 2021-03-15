@@ -13,11 +13,11 @@ class CategoryController extends Controller
         return view('admin.category.index',['categories'=>$categories]);
     }
 
-    function add(){
+    function create(){
         return view('admin.category.add');
     }
 
-    function postAdd(Request $request){
+    function store(Request $request){
        $request->validate([
             'name' => 'required|max:225',
             'description'=> 'required:double'
@@ -31,12 +31,12 @@ class CategoryController extends Controller
         return view('admin.category.index',['categories'=>$categories]);
     }
 
-    function update($id){
+    function edit($id){
         $category = Category::find($id);
         return view('admin.category.update',['category'=>$category]);
     }
 
-    function postUpdate(Request $request){
+    function update(Request $request){
         $request->validate([
             'name' => 'required|max:225',
             'description'=> 'required:double'
@@ -50,7 +50,7 @@ class CategoryController extends Controller
         return view('admin.category.index',['categories'=>$categories]);
     }
 
-    function delete($id){
+    function destroy($id){
         $category = Category::find($id);
         $category->delete();
 
