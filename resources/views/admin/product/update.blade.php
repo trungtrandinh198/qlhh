@@ -16,10 +16,11 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">CẬP NHẬT SẢN PHẨM</p>
-                        <form action="{{route('product.edit')}}" method="post">
+                        <form action="{{route('product.update')}}" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
+                                    <input type="hidden" name="id" value="{{$product->id}}">
                                     <label for="name">Danh mục</label>
                                     <select class="form form-control" name="category" id="category">
                                         @forelse($categories as $category)

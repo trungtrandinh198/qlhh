@@ -20,39 +20,42 @@ class CategoryController extends Controller
     function store(Request $request){
        $request->validate([
             'name' => 'required|max:225',
-            'description'=> 'required:double'
+            'description'=> 'required'
         ]);
-        $category = new Category();
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
+        Category::create(
+            array(
+                'name'=>$request->name,
+                'description'=>$request->description
+            )
+        );
 
         $categories = Category::all();
         return view('admin.category.index',['categories'=>$categories]);
     }
 
     function edit($id){
-        $category = Category::find($id);
+        $category = Category::where('id',$id)->first();
         return view('admin.category.update',['category'=>$category]);
     }
 
     function update(Request $request){
         $request->validate([
             'name' => 'required|max:225',
-            'description'=> 'required:double'
+            'description'=> 'required'
         ]);
-        $category = Category::find($request->id);
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
+        Category::where('id',$request->id)->first()->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description
+            ]
+        );
 
         $categories = Category::all();
         return view('admin.category.index',['categories'=>$categories]);
     }
 
     function destroy($id){
-        $category = Category::find($id);
-        $category->delete();
+        Category::where('id',$id)->delete();
 
         $categories = Category::all();
         return view('admin.category.index',['categories'=>$categories]);

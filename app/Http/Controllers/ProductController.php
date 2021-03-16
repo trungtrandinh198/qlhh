@@ -25,19 +25,21 @@ class ProductController extends Controller
             'price' => 'required',
             'category' => 'required'
         ]);
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->categoryId = $request->category;
-        $product->save();
+        Product::create(
+            array(
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'categoryId' => $request->category
+        ));
+
 
         $products = Product::all();
         return view('admin.product.index',['products'=>$products]);
     }
 
     function edit($id){
-        $product = Product::find($id);
+        $product = Product::where('id',$id)->first();
         $categories = Category::all();
         return view('admin.product.update',['product'=>$product,'categories'=>$categories]);
     }
@@ -49,20 +51,21 @@ class ProductController extends Controller
             'price' => 'required',
             'category' => 'required'
         ]);
-        $product = Product::find($request->id);
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->categoryId = $request->category;
-        $product->save();
+        Product::where('id',$request->id)->first()->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'categoryId' => $request->category
+            ]
+        );
 
         $products = Product::all();
         return view('admin.product.index',['products'=>$products]);
     }
 
     function destroy($id){
-        $product = Product::find($id);
-        $product->delete();
+        Product::where('id',$id)->delete();
 
         $products = Product::all();
         return view('admin.product.index',['products'=>$products]);
