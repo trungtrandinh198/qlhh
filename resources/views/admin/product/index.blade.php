@@ -35,12 +35,10 @@
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>
-                                            <td>
                                                 <form method="POST" action="{{route('product.destroy',['id'=>$product->id])}}">
                                                     @csrf
                                                     <button class="btn btn-danger" type="submit">Xóa</button>
                                                 </form>
-                                            </td>
                                             </td>
                                         </tr>
                                         @empty

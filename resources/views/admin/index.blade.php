@@ -3,33 +3,25 @@
 @section('content')
 <div class="content-wrapper">
     <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-title">Bảng dữ liệu</p>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="table-responsive">
-                                    <table  class="display expandable-table" style="width:100%">
-                                        <thead>
-                                        <tr>
-                                            <th>Quote#</th>
-                                            <th>Product</th>
-                                            <th>Business type</th>
-                                            <th>Policy holder</th>
-                                            <th>Premium</th>
-                                            <th>Status</th>
-                                            <th>Updated at</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
-                            </div>
+        <div class="col-md-6 grid-margin transparent">
+            <div class="row">
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card card-tale">
+                        <div class="card-body">Số lượng danh mục</p>
+                            <p class="fs-30 mb-2">{{$totalCategory}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                    <div class="card card-dark-blue">
+                        <div class="card-body">
+                            <p class="mb-4">Số lượng sản phẩm</p>
+                            <p class="fs-30 mb-2">{{$totalProduct}}</p>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 @endsection

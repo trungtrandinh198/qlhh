@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DasboarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
-});
+Route::get('/',[DasboarController::class,'index']);
 Route::prefix('category')->name('category.')->group(function(){
     Route::get('/',[CategoryController::class,'index'])->name('index');
     Route::get('/add',[CategoryController::class,'create'])->name('create');
