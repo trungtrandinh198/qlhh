@@ -12,6 +12,6 @@ class DasboarController extends Controller
         $totalCategory = Category::all()->count();
         $totalProduct = Product::all()->count();
 
-        return view('admin.index',['totalCategory'=>$totalCategory,'totalProduct'=>$totalProduct]);
+        return view('admin.index', ['totalCategory'=>$totalCategory, 'totalProduct'=>$totalProduct]);
     }
 }
