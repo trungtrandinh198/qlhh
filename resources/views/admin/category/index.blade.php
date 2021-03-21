@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="float: right;">
-                            <a class="btn btn-success" href="{{route('category.create')}}">Thêm mới</a>
+                            <a class="btn btn-success" href="{{route('admin.categories.create')}}">Thêm mới</a>
                         </div>
                         <p class="card-title">DANH SÁCH DANH MỤC</p>
                     </div>
@@ -29,12 +29,13 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>
-                                                <a href="{{route('category.edit', $category->id)}}">{{$category->name}}</a>
+                                                <a href="{{route('admin.categories.edit', $category->id)}}">{{$category->name}}</a>
                                             </td>
                                             <td>{{$category->description}}</td>
                                             <td>
-                                                <form method="POST" action="{{route('category.destroy',['id'=>$category->id])}}">
+                                                <form method="POST" action="{{route('admin.categories.destroy', ['id'=>$category->id])}}">
                                                     @csrf
+                                                    @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Xóa</button>
                                                 </form>
                                             </td>

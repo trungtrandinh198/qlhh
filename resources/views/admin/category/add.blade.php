@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <p class="card-title">THÊM MỚI DANH MỤC</p>
-                    <form action="{{route('category.store')}}" method="post">
+                    <form action="{{route('admin.categories.store')}}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-12">

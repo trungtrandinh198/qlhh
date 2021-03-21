@@ -16,8 +16,9 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">CẬP NHẬT SẢN PHẨM</p>
-                        <form action="{{route('product.update')}}" method="post">
+                        <form action="{{route('admin.products.update')}}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-12">
                                     <input type="hidden" name="id" value="{{$product->id}}">

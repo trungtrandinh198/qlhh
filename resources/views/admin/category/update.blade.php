@@ -16,8 +16,9 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title"CHỈNH SỬA DANH MỤC {{$category->name}}</p>
-                        <form action="{{route('category.update')}}" method="post">
+                        <form action="{{route('admin.categories.update')}}" method="POST">
                             @csrf
+                            @method('PUT')
                             <input type="hidden" name="id" id="id" value="{{$category->id}}">
                             <div class="row">
                                 <div class="col-12">

@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="float: right">
-                            <a class="btn btn-success" href="{{route('product.create')}}">Thêm mới</a>
+                            <a class="btn btn-success" href="{{route('admin.products.create')}}">Thêm mới</a>
                         </div>
                         <p class="card-title">DANH SÁCH SẢN PHẨM</p>
                     </div>
@@ -30,13 +30,14 @@
                                         <tr>
                                             <td>{{$product->id}}</td>
                                             <td>
-                                                <a href="{{route('product.edit', $product->id)}}">{{$product->name}}</a>
+                                                <a href="{{route('admin.products.edit', $product->id)}}">{{$product->name}}</a>
                                             </td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>
-                                                <form method="POST" action="{{route('product.destroy',['id'=>$product->id])}}">
+                                                <form method="POST" action="{{route('admin.products.destroy', ['id'=>$product->id])}}">
                                                     @csrf
+                                                    @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Xóa</button>
                                                 </form>
                                             </td>

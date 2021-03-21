@@ -2,26 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CreateCategoryRequest;
+use App\Http\Requests\Category\EditCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
-    function index(){
+    public function index()
+    {
         $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+
+        return view('admin.category.index', ['categories'=>$categories]);
     }
 
-    function create(){
+    public function create()
+    {
         return view('admin.category.add');
     }
 
-    function store(Request $request){
-       $request->validate([
-            'name' => 'required|max:225',
-            'description'=> 'required'
-        ]);
+    public function store(CreateCategoryRequest $request)
+    {
+        $request->validate();
+
         Category::create(
             array(
                 'name'=>$request->name,
@@ -29,36 +32,35 @@ class CategoryController extends Controller
             )
         );
 
-        $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+        return redirect()->route('admin.categories.index');
     }
 
-    function edit($id){
-        $category = Category::where('id',$id)->first();
-        return view('admin.category.update',['category'=>$category]);
+    public function edit($id)
+    {
+        $category = Category::where('id', $id)->first();
+
+        return view('admin.category.update', ['category'=>$category]);
     }
 
-    function update(Request $request){
-        $request->validate([
-            'name' => 'required|max:225',
-            'description'=> 'required'
-        ]);
-        Category::where('id',$request->id)->first()->update(
+    public function update(EditCategoryRequest $request)
+    {
+        $request->validate();
+
+        Category::where('id', $request->id)->first()->update(
             [
                 'name' => $request->name,
                 'description' => $request->description
             ]
         );
 
-        $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+        return redirect()->route('admin.categories.index');
     }
 
-    function destroy($id){
-        Category::where('id',$id)->delete();
+    public function destroy($id)
+    {
+        Category::where('id', $id)->delete();
 
-        $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+        return redirect()->route('admin.categories.index');
     }
 
 }
