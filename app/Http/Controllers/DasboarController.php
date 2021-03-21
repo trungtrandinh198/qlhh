@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class DasboarController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $totalCategory = Category::all()->count();
         $totalProduct = Product::all()->count();
 
