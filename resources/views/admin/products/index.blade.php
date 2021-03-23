@@ -30,12 +30,12 @@
                                         <tr>
                                             <td>{{$product->id}}</td>
                                             <td>
-                                                <a href="{{route('admin.products.edit', $product->id)}}">{{$product->name}}</a>
+                                                <a href="{{route('admin.products.edit', ['id' => $product->id])}}">{{$product->name}}</a>
                                             </td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>
-                                                <form method="POST" action="{{route('admin.products.destroy', ['id'=>$product->id])}}">
+                                                <form method="POST" action="{{route('admin.products.destroy', ['product' => $product])}}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Xóa</button>

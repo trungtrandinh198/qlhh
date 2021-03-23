@@ -16,16 +16,16 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title">CẬP NHẬT SẢN PHẨM</p>
-                        <form action="{{route('admin.products.update')}}" method="POST">
+                        <form action="{{route('admin.products.update', ['product'=>$product])}}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row">
                                 <div class="col-12">
                                     <input type="hidden" name="id" value="{{$product->id}}">
                                     <label for="name">Danh mục</label>
-                                    <select class="form form-control" name="category" id="category">
+                                    <select class="form form-control" name="category_id" id="category_id">
                                         @forelse($categories as $category)
-                                            <option value="{{$category->id}}" {{$category->id == $product->categoryId ? "selected":""}}>{{$category->name}}</option>
+                                            <option value="{{$category->id}}" {{$category->id == $product->category_id ? "selected":""}}>{{$category->name}}</option>
                                         @empty
                                             <option>Không có dữ liệu</option>
                                         @endforelse
@@ -46,7 +46,7 @@
                             </div>
                             <div style="padding-top: 5px; text-align: right">
                                 <button class="btn btn-success">Lưu</button>
-                                <a class="btn btn-info" href="javascript:void(0)" onclick="window.history.back();">Trở về</a>
+                                <a class="btn btn-info" href="{{route('admin.products.index')}}">Trở về</a>
                             </div>
                         </form>
                     </div>

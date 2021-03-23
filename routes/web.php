@@ -21,8 +21,8 @@ Route::prefix('categories')->as('admin.categories.')->group(function(){
     Route::get('/create', [CategoryController::class, 'create'])->name('create');
     Route::post('/store', [CategoryController::class, 'store'])->name('store');
     Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('edit');
-    Route::put('/update', [CategoryController::class, 'update'])->name('update');
-    Route::delete('/{id}/destroy', [CategoryController::class, 'destroy'])->name('destroy');
+    Route::put('/update/{category}', [CategoryController::class, 'update'])->name('update');
+    Route::delete('/{category}/destroy', [CategoryController::class, 'destroy'])->name('destroy');
 });
 
 Route::prefix('products')->as('admin.products.')->group(function(){
@@ -30,6 +30,6 @@ Route::prefix('products')->as('admin.products.')->group(function(){
     Route::get('/create', [ProductController::class, 'create'])->name('create');
     Route::post('/store', [ProductController::class, 'store'])->name('store');
     Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('edit');
-    Route::put('/update', [ProductController::class, 'update'])->name('update');
-    Route::delete('/{id}/destroy', [ProductController::class, 'destroy'])->name('destroy');
+    Route::put('/update/{product}', [ProductController::class, 'update'])->name('update');
+    Route::delete('/{product}/destroy', [ProductController::class, 'destroy'])->name('destroy');
 });

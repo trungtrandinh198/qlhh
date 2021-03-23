@@ -16,7 +16,7 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-title"CHỈNH SỬA DANH MỤC {{$category->name}}</p>
-                        <form action="{{route('admin.categories.update')}}" method="POST">
+                        <form action="{{route('admin.categories.update', ['category'=>$category])}}" method="POST">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" id="id" value="{{$category->id}}">
@@ -32,7 +32,7 @@
                             </div>
                             <div style="padding-top: 5px; text-align: right">
                                 <button class="btn btn-success">Lưu</button>
-                                <a class="btn btn-info" href="javascript:void(0)" onclick="window.history.back();">Trở về</a>
+                                <a class="btn btn-info" href="{{route('admin.categories.index')}}">Trở về</a>
                             </div>
                         </form>
                     </div>

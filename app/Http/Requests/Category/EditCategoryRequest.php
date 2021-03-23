@@ -29,12 +29,4 @@ class EditCategoryRequest extends FormRequest
         ];
     }
 
-    public function  messages()
-    {
-        return [
-            'name.required' => 'Phải nhập tên danh mục',
-            'description.required' => 'Phải nhập mô tả danh mục',
-            'name.max' => 'Tên danh mục tối đa 50 ký tự'
-        ];
-    }
 }

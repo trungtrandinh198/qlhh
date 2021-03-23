@@ -10,9 +10,9 @@ class DasboarController extends Controller
 {
     public function index()
     {
-        $totalCategory = Category::all()->count();
-        $totalProduct = Product::all()->count();
+        $totalCategory = Category::count();
+        $totalProduct = Product::count();
 
-        return view('admin.index', ['totalCategory'=>$totalCategory, 'totalProduct'=>$totalProduct]);
+        return view('admin.index', compact('totalCategory', 'totalProduct'));
     }
 }

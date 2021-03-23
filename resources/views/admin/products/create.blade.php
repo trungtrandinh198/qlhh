@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <label for="name">Danh mục</label>
-                                <select class="form form-control" name="category" id="category">
+                                <select class="form form-control" name="category_id" id="category_id">
                                     @forelse($categories as $category)
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                     @empty
@@ -44,7 +44,7 @@
                         </div>
                         <div style="padding-top: 5px; text-align: right">
                             <button class="btn btn-success">Lưu</button>
-                            <a class="btn btn-info" href="javascript:void(0)" onclick="window.history.back();">Trở về</a>
+                            <a class="btn btn-info" href="{{route('admin.products.index')}}">Trở về</a>
                         </div>
                     </form>
                 </div>

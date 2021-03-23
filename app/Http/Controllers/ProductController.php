@@ -13,25 +13,26 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return view('admin.product.index', ['products'=>$products]);
+        return view('admin.products.index', compact('products'));
     }
 
     public function create()
     {
         $categories = Category::all();
 
-        return view('admin.product.add', ['categories'=>$categories]);
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(CreateProductRequest $request)
     {
         Product::create(
-            array(
+            [
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
-                'categoryId' => $request->category
-        ));
+                'category_id' => $request->category_id
+            ]
+        );
 
 
         return redirect()->route('admin.products.index');
@@ -42,28 +43,29 @@ class ProductController extends Controller
         $product = Product::where('id', $id)->first();
         $categories = Category::all();
 
-        return view('admin.product.update', ['product'=>$product, 'categories'=>$categories]);
+        return view('admin.products.edit', compact('product', 'categories' ));
     }
 
-    public function update(EditProductRequest $request)
+    public function update(EditProductRequest $request, Product $product)
     {
 
 
-        Product::where('id', $request->id)->first()->update(
+        $product = Product::where('id', $product->id)->first();
+        $product->update(
             [
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
-                'categoryId' => $request->category
+                'category_id' => $request->category_id
             ]
         );
 
         return redirect()->route('admin.products.index');
     }
 
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        Product::where('id', $id)->delete();
+        Product::where('id', $product->id)->delete();
 
         return redirect()->route('admin.products.index');
     }

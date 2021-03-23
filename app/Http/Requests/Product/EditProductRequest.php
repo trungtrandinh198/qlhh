@@ -27,18 +27,8 @@ class EditProductRequest extends FormRequest
             'name' => 'required|max:225',
             'description' => 'required',
             'price' => 'required',
-            'category' => 'required'
+            'category_id' => 'required'
         ];
     }
 
-    public function  messages()
-    {
-        return [
-            'name.required' => 'Phải tên sản phẩm',
-            'description.required' => 'Phải nhập mô tả sản phẩm',
-            'price.required' => 'Phải nhập giá của sản phẩm',
-            'category.required' => 'Phải chọn danh mục sản phẩm',
-            'name.max' => 'Tên sản phẩm tối đa 50 ký tự'
-        ];
-    }
 }

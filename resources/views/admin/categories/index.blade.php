@@ -29,11 +29,11 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>
-                                                <a href="{{route('admin.categories.edit', $category->id)}}">{{$category->name}}</a>
+                                                <a href="{{route('admin.categories.edit', ['id' => $category->id])}}">{{$category->name}}</a>
                                             </td>
                                             <td>{{$category->description}}</td>
                                             <td>
-                                                <form method="POST" action="{{route('admin.categories.destroy', ['id'=>$category->id])}}">
+                                                <form method="POST" action="{{route('admin.categories.destroy', ['category' => $category])}}">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger" type="submit">Xóa</button>
