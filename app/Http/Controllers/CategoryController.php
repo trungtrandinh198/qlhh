@@ -34,17 +34,13 @@ class CategoryController extends Controller
         return redirect()->route('admin.categories.index');
     }
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::where('id', $id)->first();
-
         return view('admin.categories.edit', compact('category'));
     }
 
     public function update(EditCategoryRequest $request, Category $category)
     {
-
-        $category = Category::where('id', $category->id)->first();
 
         $category->update(
             [
@@ -58,9 +54,10 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        Category::where('id', $category->id)->delete();
+        $category->delete();
 
         return redirect()->route('admin.categories.index');
     }
 
 }
+

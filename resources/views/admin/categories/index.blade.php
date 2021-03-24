@@ -29,7 +29,7 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>
-                                                <a href="{{route('admin.categories.edit', ['id' => $category->id])}}">{{$category->name}}</a>
+                                                <a href="{{route('admin.categories.edit', ['category' => $category])}}">{{$category->name}}</a>
                                             </td>
                                             <td>{{$category->description}}</td>
                                             <td>

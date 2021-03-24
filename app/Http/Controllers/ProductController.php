@@ -38,9 +38,8 @@ class ProductController extends Controller
         return redirect()->route('admin.products.index');
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::where('id', $id)->first();
         $categories = Category::all();
 
         return view('admin.products.edit', compact('product', 'categories' ));
@@ -48,9 +47,6 @@ class ProductController extends Controller
 
     public function update(EditProductRequest $request, Product $product)
     {
-
-
-        $product = Product::where('id', $product->id)->first();
         $product->update(
             [
                 'name' => $request->name,
@@ -65,7 +61,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        Product::where('id', $product->id)->delete();
+        $product->delete();
 
         return redirect()->route('admin.products.index');
     }

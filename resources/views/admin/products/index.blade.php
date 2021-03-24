@@ -30,7 +30,7 @@
                                         <tr>
                                             <td>{{$product->id}}</td>
                                             <td>
-                                                <a href="{{route('admin.products.edit', ['id' => $product->id])}}">{{$product->name}}</a>
+                                                <a href="{{route('admin.products.edit', ['product' => $product])}}">{{$product->name}}</a>
                                             </td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->description}}</td>
