@@ -5,9 +5,13 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <div style="float: right">
+                            <a class="btn btn-success" href="{{route('admin.products.create')}}">Thêm mới</a>
+                        </div>
                         <p class="card-title">DANH SÁCH SẢN PHẨM</p>
-                        <a class="btn btn-success" href="{{route('product.add')}}">Thêm mới</a>
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -26,12 +30,16 @@
                                         <tr>
                                             <td>{{$product->id}}</td>
                                             <td>
-                                                <a href="{{route('product.update', $product->id)}}">{{$product->name}}</a>
+                                                <a href="{{route('admin.products.edit', ['product' => $product])}}">{{$product->name}}</a>
                                             </td>
                                             <td>{{$product->price}}</td>
                                             <td>{{$product->description}}</td>
                                             <td>
-                                                <button class="btn btn-danger">Xóa</button>
+                                                <form method="POST" action="{{route('admin.products.destroy', ['product' => $product])}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit">Xóa</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @empty

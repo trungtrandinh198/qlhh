@@ -2,58 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Product\CreateProductRequest;
+use App\Http\Requests\Product\EditProductRequest;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    function index(){
+    public function index()
+    {
         $products = Product::all();
-        return view('admin.product.index',['products'=>$products]);
+
+        return view('admin.products.index', compact('products'));
     }
 
-    function add(){
+    public function create()
+    {
         $categories = Category::all();
-        return view('admin.product.add',['categories'=>$categories]);
+
+        return view('admin.products.create', compact('categories'));
     }
 
-    function postAdd(Request $request){
-        $product = new Product();
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->categoryId = $request->category;
-        $product->save();
+    public function store(CreateProductRequest $request)
+    {
+        Product::create(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'category_id' => $request->category_id
+            ]
+        );
 
-        $products = Product::all();
-        return view('admin.product.index',['products'=>$products]);
+
+        return redirect()->route('admin.products.index');
     }
 
-    function update($id){
-        $product = Product::find($id);
+    public function edit(Product $product)
+    {
         $categories = Category::all();
-        return view('admin.product.update',['product'=>$product,'categories'=>$categories]);
+
+        return view('admin.products.edit', compact('product', 'categories' ));
     }
 
-    function postUpdate(Request $request){
-        $product = Product::find($request->id);
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->categoryId = $request->category;
-        $product->save();
+    public function update(EditProductRequest $request, Product $product)
+    {
+        $product->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description,
+                'price' => $request->price,
+                'category_id' => $request->category_id
+            ]
+        );
 
-        $products = Product::all();
-        return view('admin.product.index',['products'=>$products]);
+        return redirect()->route('admin.products.index');
     }
 
-    function delete(Request $id){
-        $product = Product::find($id);
+    public function destroy(Product $product)
+    {
         $product->delete();
 
-        $products = Product::all();
-        dd($products);
-        //return view('admin.product.list','$products');
+        return redirect()->route('admin.products.index');
     }
 }

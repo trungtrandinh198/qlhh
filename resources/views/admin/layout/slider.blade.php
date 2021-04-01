@@ -7,13 +7,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('category.index')}}">
+            <a class="nav-link" href="{{route('admin.categories.index')}}">
                 <i class="fa fa-list menu-icon"></i>
                 <span class="menu-title">Danh mục</span>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('product.index')}}">
+            <a class="nav-link" href="{{route('admin.products.index')}}">
                 <i class="fa fa-archive menu-icon"></i>
                 <span class="menu-title">Sản phẩm</span>
             </a>

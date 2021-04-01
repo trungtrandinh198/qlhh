@@ -16,7 +16,7 @@ class ProductsSeeder extends Seeder
     {
         DB::table('products')->insert([
         'name'=>'Kẹo dẻo',
-        'categoryId'=>1,
+        'category_id'=>1,
         'price'=>'5000',
         'description'=>'123123',
     ]);

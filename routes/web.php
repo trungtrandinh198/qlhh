@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DasboarController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,23 +15,21 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.index');
-});
-Route::prefix('category')->name('category.')->group(function(){
-    Route::get('/',[CategoryController::class,'index'])->name('index');
-    Route::get('/add',[CategoryController::class,'add'])->name('add');
-    Route::post('/post-add',[CategoryController::class,'postAdd'])->name('postAdd');
-    Route::get('/{id}/update',[CategoryController::class,'update'])->name('update');
-    Route::post('/post-update',[CategoryController::class,'postUpdate'])->name('postUpdate');
-    Route::post('/{id}/delete',[CategoryController::class,'delete'])->name('delete');
+Route::get('/', [DasboarController::class, 'index']);
+Route::prefix('categories')->as('admin.categories.')->group(function(){
+    Route::get('/', [CategoryController::class, 'index'])->name('index');
+    Route::get('/create', [CategoryController::class, 'create'])->name('create');
+    Route::post('/store', [CategoryController::class, 'store'])->name('store');
+    Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('edit');
+    Route::put('/update/{category}', [CategoryController::class, 'update'])->name('update');
+    Route::delete('/{category}/destroy', [CategoryController::class, 'destroy'])->name('destroy');
 });
 
-Route::prefix('product')->name('product.')->group(function(){
-    Route::get('/',[ProductController::class,'index'])->name('index');
-    Route::get('/add',[ProductController::class,'add'])->name('add');
-    Route::post('/post-add',[ProductController::class,'postAdd'])->name('postAdd');
-    Route::get('/{id}/update',[ProductController::class,'update'])->name('update');
-    Route::post('/post-update',[ProductController::class,'postUpdate'])->name('postUpdate');
-    Route::post('/{id}/delete',[ProductController::class,'delete'])->name('delete');
+Route::prefix('products')->as('admin.products.')->group(function(){
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/create', [ProductController::class, 'create'])->name('create');
+    Route::post('/store', [ProductController::class, 'store'])->name('store');
+    Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('edit');
+    Route::put('/update/{product}', [ProductController::class, 'update'])->name('update');
+    Route::delete('/{product}/destroy', [ProductController::class, 'destroy'])->name('destroy');
 });

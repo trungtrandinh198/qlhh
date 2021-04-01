@@ -2,53 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Category\CreateCategoryRequest;
+use App\Http\Requests\Category\EditCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
-    function index(){
+    public function index()
+    {
         $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+
+        return view('admin.categories.index', compact('categories'));
     }
 
-    function add(){
-        return view('admin.category.add');
+    public function create()
+    {
+        return view('admin.categories.create');
     }
 
-    function postAdd(Request $request){
-        $category = new Category();
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
+    public function store(CreateCategoryRequest $request)
+    {
 
-        $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+        Category::create(
+            [
+                'name' => $request->name,
+                'description' => $request->description
+            ]
+        );
+
+        return redirect()->route('admin.categories.index');
     }
 
-    function update($id){
-        $category = Category::find($id);
-        return view('admin.category.update',['category'=>$category]);
+    public function edit(Category $category)
+    {
+        return view('admin.categories.edit', compact('category'));
     }
 
-    function postUpdate(Request $request){
-        $category = Category::find($request->id);
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
+    public function update(EditCategoryRequest $request, Category $category)
+    {
 
-        $categories = Category::all();
-        return view('admin.category.index',['categories'=>$categories]);
+        $category->update(
+            [
+                'name' => $request->name,
+                'description' => $request->description
+            ]
+        );
+
+        return redirect()->route('admin.categories.index');
     }
 
-    function delete(Request $id){
-        $category = Category::find($id);
+    public function destroy(Category $category)
+    {
         $category->delete();
 
-        $categories = Category::all();
-        dd($categories);
-        //return view('admin.category.index','$categories);
+        return redirect()->route('admin.categories.index');
     }
 
 }
+

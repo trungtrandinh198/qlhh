@@ -5,9 +5,13 @@
         <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-header">
+                        <div style="float: right;">
+                            <a class="btn btn-success" href="{{route('admin.categories.create')}}">Thêm mới</a>
+                        </div>
                         <p class="card-title">DANH SÁCH DANH MỤC</p>
-                        <a class="btn btn-success">Thêm mới</a>
+                    </div>
+                    <div class="card-body">
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -25,11 +29,15 @@
                                         <tr>
                                             <td>{{$category->id}}</td>
                                             <td>
-                                                <a href="{{route('category.update', $category->id)}}">{{$category->name}}</a>
+                                                <a href="{{route('admin.categories.edit', ['category' => $category])}}">{{$category->name}}</a>
                                             </td>
                                             <td>{{$category->description}}</td>
                                             <td>
-                                                <button class="btn btn-danger">Xóa</button>
+                                                <form method="POST" action="{{route('admin.categories.destroy', ['category' => $category])}}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" type="submit">Xóa</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @empty
