@@ -6,12 +6,19 @@ use App\Http\Requests\Product\CreateProductRequest;
 use App\Http\Requests\Product\EditProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Repositories\Contracts\ProductRepository;
 
 class ProductController extends Controller
 {
+    protected $repossitory;
+    public function __construct(ProductRepository $repository)
+    {
+        $this->repossitory =  $repository;
+    }
+
     public function index()
     {
-        $products = Product::all();
+        $products = $this->repossitory->all();
 
         return view('admin.products.index', compact('products'));
     }
@@ -25,7 +32,7 @@ class ProductController extends Controller
 
     public function store(CreateProductRequest $request)
     {
-        Product::create(
+        $this->repossitory->create(
             [
                 'name' => $request->name,
                 'description' => $request->description,
@@ -33,7 +40,6 @@ class ProductController extends Controller
                 'category_id' => $request->category_id
             ]
         );
-
 
         return redirect()->route('admin.products.index');
     }
@@ -47,21 +53,21 @@ class ProductController extends Controller
 
     public function update(EditProductRequest $request, Product $product)
     {
-        $product->update(
+        $this->repossitory->update(
             [
                 'name' => $request->name,
                 'description' => $request->description,
                 'price' => $request->price,
                 'category_id' => $request->category_id
             ]
-        );
+        , $product->id);
 
         return redirect()->route('admin.products.index');
     }
 
     public function destroy(Product $product)
     {
-        $product->delete();
+        $this->repossitory->delete($product->id);
 
         return redirect()->route('admin.products.index');
     }

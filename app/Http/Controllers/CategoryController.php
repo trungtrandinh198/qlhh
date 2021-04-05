@@ -5,16 +5,26 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Http\Requests\Category\EditCategoryRequest;
 use App\Models\Category;
+use App\Repositories\Contracts\CategoryRepository;
+use Illuminate\Support\Facades\Input;
 
 class CategoryController extends Controller
 {
 
+    protected $repository;
+
+    public function __construct(CategoryRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function index()
     {
-        $categories = Category::all();
+        $categories = $this->repository->all();
 
         return view('admin.categories.index', compact('categories'));
     }
+
 
     public function create()
     {
@@ -24,12 +34,12 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
 
-        Category::create(
-            [
+       $this->repository->create(
+           [
                 'name' => $request->name,
                 'description' => $request->description
-            ]
-        );
+           ]
+       );
 
         return redirect()->route('admin.categories.index');
     }
@@ -42,19 +52,19 @@ class CategoryController extends Controller
     public function update(EditCategoryRequest $request, Category $category)
     {
 
-        $category->update(
+       $this->repository->update(
             [
                 'name' => $request->name,
                 'description' => $request->description
             ]
-        );
+        , $category->id);
 
         return redirect()->route('admin.categories.index');
     }
 
     public function destroy(Category $category)
     {
-        $category->delete();
+        $this->repository->delete($category->id);
 
         return redirect()->route('admin.categories.index');
     }
