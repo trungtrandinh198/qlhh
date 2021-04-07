@@ -48,6 +48,7 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                {{$categories->links('view.vendor.pagination.bootstrap-4')}}
                             </div>
                         </div>
                     </div>

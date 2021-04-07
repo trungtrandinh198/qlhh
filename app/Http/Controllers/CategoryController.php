@@ -6,21 +6,22 @@ use App\Http\Requests\Category\CreateCategoryRequest;
 use App\Http\Requests\Category\EditCategoryRequest;
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepository;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
-    protected $repository;
+    protected $categoryRepository;
 
     public function __construct(CategoryRepository $repository)
     {
-        $this->repository = $repository;
+        $this->categoryRepository = $repository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = $this->repository->all();
+        $limit = $request->input('limit', 5);
+        $categories = $this->categoryRepository->paginate($limit);
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -34,12 +35,7 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
     {
 
-       $this->repository->create(
-           [
-                'name' => $request->name,
-                'description' => $request->description
-           ]
-       );
+       $this->categoryRepository->create($request->validated());
 
         return redirect()->route('admin.categories.index');
     }
@@ -52,19 +48,14 @@ class CategoryController extends Controller
     public function update(EditCategoryRequest $request, Category $category)
     {
 
-       $this->repository->update(
-            [
-                'name' => $request->name,
-                'description' => $request->description
-            ]
-        , $category->id);
+       $this->categoryRepository->update($request->validated(), $category->id);
 
         return redirect()->route('admin.categories.index');
     }
 
     public function destroy(Category $category)
     {
-        $this->repository->delete($category->id);
+        $this->categoryRepository->delete($category->id);
 
         return redirect()->route('admin.categories.index');
     }
